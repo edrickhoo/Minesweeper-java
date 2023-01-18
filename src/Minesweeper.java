@@ -179,7 +179,7 @@ public class Minesweeper {
 		
 		boolean gameIsRunning = true;
 		Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-		
+		Scanner stringScanner = new Scanner(System.in);
 				while (gameIsRunning) {
 					int size = 10;
 					int bombs = 10;
@@ -224,7 +224,7 @@ public class Minesweeper {
 				}
 				
 				 System.out.println("Please enter Y to play again, anything else to exit");
-				 char playAgain = checkPlayAgain(myObj);
+				 char playAgain = checkPlayAgain(stringScanner);
 				 if(playAgain == 'y') {
 		                System.out.println("New game loading...");
 		            } else {
