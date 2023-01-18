@@ -192,7 +192,6 @@ public class Minesweeper {
 //					Enter two inputs
 					int y = getYInput(myObj, size);
 					int x = getXInput(myObj, size);
-					printBoard(board);
 //					Check if lost or clear or win
 					
 //					If coords is a mine
