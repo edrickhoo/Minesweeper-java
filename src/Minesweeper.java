@@ -142,13 +142,13 @@ public class Minesweeper {
 		return bombs;
 	}
 	
-	public static char checkPlayAgain(Scanner myObj) {
-	        String letter = myObj.nextLine();
+	public static boolean checkPlayAgain(String letter) {
 
-	        if(letter.length() > 0) {
-	            return letter.toLowerCase().charAt(0);
+
+	        if(letter.equals("y") || letter.equals("Y")) {
+	           return true;
 	        } else {
-	            return 'x';
+	            return false;
 	        }
 
 	    }
@@ -174,12 +174,9 @@ public class Minesweeper {
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		greetPlayer();
-		
 		boolean gameIsRunning = true;
 		Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-		Scanner stringScanner = new Scanner(System.in);
 				while (gameIsRunning) {
 					int size = 10;
 					int bombs = 10;
@@ -224,8 +221,9 @@ public class Minesweeper {
 				}
 				
 				 System.out.println("Please enter Y to play again, anything else to exit");
-				 char playAgain = checkPlayAgain(stringScanner);
-				 if(playAgain == 'y') {
+				 String letter = myObj.next();
+				 boolean playAgain = checkPlayAgain(letter);
+				 if(playAgain) {
 		                System.out.println("New game loading...");
 		            } else {
 		                System.out.println("Thank you for playing, see you next time!");
