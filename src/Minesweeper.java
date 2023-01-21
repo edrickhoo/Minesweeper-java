@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Minesweeper {
 	
-	public static int[][] generateBoard(int size, int bombs) {
+	public int[][] generateBoard(int size, int bombs) {
 		int[][] board = new int[size][size];
 		for(int i = 0; i < board.length; i ++) {
 			for(int j = 0; j < board[i].length; j ++) {
@@ -14,7 +14,7 @@ public class Minesweeper {
 	}
 	
 //	Recreating the board but hiding the mines as unchecked.
-	public static void generateAndPrintPlayerBoard(int[][] board) {
+	public void generateAndPrintPlayerBoard(int[][] board) {
 		int[][] playerBoard = new int[board.length][board.length];
 		for(int i = 0; i < playerBoard.length; i ++) {
 			for(int j = 0; j < playerBoard[i].length; j ++) {
@@ -56,7 +56,7 @@ public class Minesweeper {
 		
 	}
 	
-	public static int getYInput(Scanner myObj, int size) {
+	public int getYInput(Scanner myObj, int size) {
 	        System.out.println("Please enter Y Cord");
 	        boolean validInput = true;
 
@@ -72,7 +72,7 @@ public class Minesweeper {
 	    
 	}
 	
-	public static int getXInput(Scanner myObj, int size) {
+	public int getXInput(Scanner myObj, int size) {
         System.out.println("Please enter X Cord");
         boolean validInput = true;
 
@@ -96,7 +96,7 @@ public class Minesweeper {
 		return false;
 	}
 	
-	public static int checkSurroundingForBombs(int[][]board, int x, int y) {
+	public int checkSurroundingForBombs(int[][]board, int x, int y) {
 		int bombs = 0;
 		
 		int[][] surroundingCoords = {{x + 1, y}, {x + 1, y + 1}, {x, y + 1}, {x -1, y + 1}, {x -1, y}, {x -1, y -1}, {x, y -1}, {x + 1, y -1},};
@@ -106,43 +106,10 @@ public class Minesweeper {
 				bombs++;
 			} 
 		}
-		
-////		Check top
-//		if (checkInBounds(x + 1, y, board.length) && board[y][x + 1] == 1) {
-//			bombs++;
-//		}
-////		Check top right
-//		if (checkInBounds(x + 1, y + 1, board.length) && board[y + 1][x + 1] == 1) {
-//			bombs++;
-//		}
-////		Check right
-//		if (checkInBounds(x, y + 1, board.length) && board[y + 1][x] == 1) {
-//			bombs++;
-//		}
-////		Check bottom right
-//		if (checkInBounds(x - 1, y + 1, board.length) && board[y + 1][x - 1] == 1) {
-//			bombs++;
-//		}
-////		Check bottom
-//		if (checkInBounds(x - 1, y, board.length) && board[y][x - 1] == 1) {
-//			bombs++;
-//		}
-////		Check bottom left
-//		if (checkInBounds(x - 1, y - 1, board.length) && board[y - 1][x - 1] == 1) {
-//			bombs++;
-//		}
-////		Check left
-//		if (checkInBounds(x, y - 1, board.length) && board[y - 1][x] == 1) {
-//			bombs++;
-//		}
-////		Check top left
-//		if (checkInBounds(x + 1, y - 1, board.length) && board[y - 1][x + 1] == 1) {
-//			bombs++;
-//		}
 		return bombs;
 	}
 	
-	public static boolean checkPlayAgain(String letter) {
+	public boolean checkPlayAgain(String letter) {
 
 
 	        if(letter.equals("y") || letter.equals("Y")) {
@@ -153,7 +120,7 @@ public class Minesweeper {
 
 	    }
 	
-	public static boolean checkGameWon(int[][]board) {
+	public boolean checkGameWon(int[][]board) {
 		for(int i = 0; i < board.length; i ++) {
 			for(int j = 0; j < board[i].length; j ++) {
 				if(board[i][j] == 0) {
@@ -178,17 +145,18 @@ public class Minesweeper {
 		boolean gameIsRunning = true;
 		Scanner myObj = new Scanner(System.in);  // Create a Scanner object
 				while (gameIsRunning) {
+					Minesweeper newGame = new Minesweeper();
 					int size = 10;
 					int bombs = 10;
-					int[][] board = generateBoard(size, bombs);
+					int[][] board = newGame.generateBoard(size, bombs);
 					
 				while(true) {
 //					Print board
-					generateAndPrintPlayerBoard(board);
+					newGame.generateAndPrintPlayerBoard(board);
 					
 //					Enter two inputs
-					int y = getYInput(myObj, size);
-					int x = getXInput(myObj, size);
+					int y = newGame.getYInput(myObj, size);
+					int x = newGame.getXInput(myObj, size);
 //					Check if lost or clear or win
 					
 //					If coords is a mine
@@ -202,8 +170,8 @@ public class Minesweeper {
 //					If coords is unchecked
 					if(board[y][x] == 0) {
 						board[y][x] = 2;
-						int amountOfBombsNearBy = checkSurroundingForBombs(board, x, y);
-						if(checkGameWon(board)) {
+						int amountOfBombsNearBy = newGame.checkSurroundingForBombs(board, x, y);
+						if(newGame.checkGameWon(board)) {
 							
 							System.out.println("You have sweeped all the mines safely");
 							System.out.println("You Win");
@@ -222,7 +190,7 @@ public class Minesweeper {
 				
 				 System.out.println("Please enter Y to play again, anything else to exit");
 				 String letter = myObj.next();
-				 boolean playAgain = checkPlayAgain(letter);
+				 boolean playAgain = newGame.checkPlayAgain(letter);
 				 if(playAgain) {
 		                System.out.println("New game loading...");
 		            } else {
