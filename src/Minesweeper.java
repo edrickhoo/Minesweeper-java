@@ -34,8 +34,9 @@ public class Minesweeper {
 	}
 	
 	public static void printBoard(int[][] board) {
+		System.out.println("   0  1  2  3  4  5  6  7  8  9");
 		for(int i = 0; i < board.length; i ++) {
-			System.out.println(Arrays.toString(board[i]));
+			System.out.println( i + " " + Arrays.toString(board[i]));
 		}
 	}
 //	Selects random coordinates and places bombs until there is a certain amount placed
